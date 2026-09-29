@@ -6,7 +6,7 @@ class MemberController extends Controller
 {
     public function index()
     {
-        $members = ['Andi Wijaya', 'Budi Santoso', 'Siti Rahma', 'Dewi Lestari', 'Eko Prasetyo'];
+        $members = ['Nataya Diat Fauziah', 'Choi Hyunsuk', 'Park Jeongwoo', 'Soo Junghwan', 'Kim Taejyung'];
 
         return view('members.index', compact('members'));
     }
