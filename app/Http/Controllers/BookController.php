@@ -13,4 +13,3 @@ class BookController extends Controller
         return view('books.index', compact('books'));
     }
 }
-```[cite: 2]
