@@ -22,7 +22,7 @@ class BookSeeder extends Seeder
             ['title' => 'Laut Bercerita', 'author' => 'Leila S. Chudori', 'year' => 2017, 'stock' => 9],
             ['title' => 'Dilan 1990', 'author' => 'Pidi Baiq', 'year' => 2014, 'stock' => 20],
             ['title' => 'Negeri 5 Menara', 'author' => 'Ahmad Fuadi', 'year' => 2009, 'stock' => 11],
-            ['title' => 'Perahu Kertas', 'author' => 'Dee Lestari', 'year' => 2009, 'stock' => 14],
+            ['title' => 'Perahu Kertas', 'author' => 'De Lestari', 'year' => 2009, 'stock' => 14],
         ];
 
         foreach ($books as $book) {
