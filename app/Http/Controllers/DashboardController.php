@@ -8,9 +8,9 @@ class DashboardController extends Controller
     {
         $title = 'Library System';
         $description = 'Sistem Informasi Perpustakaan untuk Mengelola Buku dan Member';
-        $totalBooks = 5;
-        $totalMembers = 5;
-        $totalCategories = 5;
+        $totalBooks = 10;
+        $totalMembers = 10;
+        $totalCategories = 10;
 
         return view('dashboard.index', compact('title', 'description', 'totalBooks', 'totalMembers', 'totalCategories'));
     }

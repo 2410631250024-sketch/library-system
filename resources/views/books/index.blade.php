@@ -13,6 +13,11 @@
             <form action="{{ route('books.destroy', $book) }}" method="POST">
                 @csrf
                 @method('DELETE')
+
+                <button type="submit">
+                    Hapus
+                </button>
+            </form>
             @endforeach
 </ul>
 @endsection

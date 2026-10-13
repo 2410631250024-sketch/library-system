@@ -12,10 +12,9 @@ class BookController extends Controller
      */
     public function index()
     {
+        $books = Book::all();
 
-    $books = Book::all();
-
-    return view('books.index', compact('books'));
+        return view('books.index', compact('books'));
     }
 
     /**
@@ -32,14 +31,13 @@ class BookController extends Controller
     public function store(Request $request)
     {
         Book::create([
-        'title' => $request->title,
-        'author' => $request->author,
-        'year' => $request->year,
-        'stock' => $request->stock,
-    ]);
+            'title' => $request->title,
+            'author' => $request->author,
+            'year' => $request->year,
+            'stock' => $request->stock,
+        ]);
 
-    return redirect()->route('books.index');
-
+        return redirect()->route('books.index');
     }
 
     /**
@@ -49,7 +47,7 @@ class BookController extends Controller
     {
         $title = "Detail Buku";
 
-        return view ('books.show', compact('title', 'book'));
+        return view('books.show', compact('title', 'book'));
     }
 
     /**
@@ -59,7 +57,7 @@ class BookController extends Controller
     {
         $title = "Edit Buku";
 
-        return view ('books.edit', compact('title', 'book'));
+        return view('books.edit', compact('title', 'book'));
     }
 
     /**
@@ -68,13 +66,13 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $book->update([
-        'title' => $request->title,
-        'author' => $request->author,
-        'year' => $request->year,
-        'stock' => $request->stock,
+            'title' => $request->title,
+            'author' => $request->author,
+            'year' => $request->year,
+            'stock' => $request->stock,
         ]);
 
-    return redirect()->route('books.index');
+        return redirect()->route('books.index');
     }
 
     /**
