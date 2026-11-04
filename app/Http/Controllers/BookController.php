@@ -13,9 +13,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        // Menggunakan with('category') untuk eager loading relasi agar tidak kena N+1 Query
-        $books = Book::with('category')->latest()->get();
-
+        $books = Book::with('category')->get();
         return view('books.index', compact('books'));
     }
 
@@ -24,10 +22,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Buku";
         $categories = Category::orderBy('name')->get();
-
-        return view('books.create', compact('title', 'categories'));
+        return view('books.create', compact('categories'));
     }
 
     /**
@@ -36,18 +32,19 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title'       => 'required|string|min:3|max:255',
-            'author'      => 'required|string|min:3|max:255',
-            'year'        => 'required|digits:4|integer|min:1900|max:' . date('Y'),
-            'stock'       => 'required|integer|min:0|max:1000',
-            'category_id' => 'required|exists:categories,id', // Fix: 'exits' diubah ke 'exists'
+            'title'  => 'required|string|min:3|max:255|unique:books,title',
+            'author' => 'required|string|min:3|max:255',
+            'year'   => 'required|integer|min:1900|max:' . date('Y'),
+            'stock'  => 'required|integer|min:0|max:1000',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         Book::create($validated);
 
-        return redirect()
-            ->route('books.index')
-            ->with('success', 'Data buku berhasil ditambahkan.');
+    return redirect()
+        ->route('books.index')
+        ->with('success', 'Data buku berhasil ditambahkan. ');
+
     }
 
     /**
@@ -57,7 +54,7 @@ class BookController extends Controller
     {
         $title = "Detail Buku";
 
-        return view('books.show', compact('title', 'book'));
+        return view ('books.show', compact('title', 'book'));
     }
 
     /**
@@ -67,8 +64,7 @@ class BookController extends Controller
     {
         $title = "Edit Buku";
         $categories = Category::orderBy('name')->get();
-
-        return view('books.edit', compact('title', 'book', 'categories'));
+        return view ('books.edit', compact('title', 'book', 'categories'));
     }
 
     /**
@@ -77,18 +73,18 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $validated = $request->validate([
-            'title'       => 'required|string|min:3|max:255',
-            'author'      => 'required|string|min:3|max:255',
-            'year'        => 'required|digits:4|integer|min:1900|max:' . date('Y'),
-            'stock'       => 'required|integer|min:0|max:1000',
-            'category_id' => 'required|exists:categories,id', // Fix: 'exits' diubah ke 'exists'
+            'title'  => 'required|string|min:3|max:255|unique:books,title',
+            'author' => 'required|string|min:3|max:255',
+            'year'   => 'required|integer|min:1900|max:' . date('Y'),
+            'stock'  => 'required|integer|min:0|max:1000',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         $book->update($validated);
 
-        return redirect()
-            ->route('books.index')
-            ->with('success', 'Data buku berhasil diperbarui.');
+    return redirect()
+        ->route('books.index')
+        ->with('success', 'Data buku berhasil diubah. ');
     }
 
     /**
@@ -98,8 +94,6 @@ class BookController extends Controller
     {
         $book->delete();
 
-        return redirect()
-            ->route('books.index')
-            ->with('success', 'Data buku berhasil dihapus.');
+        return redirect()->route('books.index');
     }
 }
