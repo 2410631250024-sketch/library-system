@@ -12,7 +12,12 @@
             <a href="/books">Books</a> |
             <a href="/categories">Categories</a> |
             <a href="/members">Members</a>
-            <form action="{{ route('logout') }}" method="POST">
+            
+            @can('manage-users')
+                | <a href="{{ route('users.index') }}">Users</a>
+            @endcan
+
+            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                 @csrf
                 <button type="submit">Logout</button>
             </form>
@@ -26,7 +31,7 @@
 
     <footer>
         <hr>
-        <p>&copy; Library System</p>
+        <p>© Library System</p>
     </footer>
 </body>
 </html>
